@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+}
+
+#quote-box {
+    color: white;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    text-align: center;
+    max-width: 80%;
+    box-shadow: -8px -8px 50px #000000;
+    text-shadow: 0px 0px 3px #000000;
+}
+
+#quote-text {
+    font-size: 2em;
+}
+
+#download-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 30px;
+    height: 30px;
+    background: url('assets/download-icon.png') no-repeat center;
+    background-size: 70%;
+    border-radius: 50%;
+    border: 2px solid white; /* Add a white border */
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#download-button:hover {
+    background-color: rgba(0,0,0,0.1);
+}

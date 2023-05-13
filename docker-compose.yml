@@ -1,0 +1,10 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+     - "5353:5353"
+    volumes:
+     - ./sayings.txt:/usr/src/app/sayings.txt
+     - ./images:/usr/src/app/images
+    restart: always
