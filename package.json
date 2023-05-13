@@ -1,5 +1,5 @@
 {
-  "name": "motivation",
+  "name": "motivationalposter",
   "version": "1.0.0",
   "description": "Motivational quote and jokes over a wallpaper. Both randomly selected.",
   "main": "server.js",
@@ -8,7 +8,7 @@
     "start": "node server.js"
   },
   "author": "Steven Partridge",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.18.2"
   }
