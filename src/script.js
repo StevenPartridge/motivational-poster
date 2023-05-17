@@ -1,10 +1,10 @@
 // Function to fetch sayings from server
 async function fetchSayings() {
     try {
-        const response = await fetch('/sayings');
+        const response = await fetch('/api/sayings');
         const data = await response.text();
         const sayings = data.split('\n');
-        return sayings;  // Now you can use sayings array
+        return JSON.parse(sayings);  // Now you can use sayings array
     } catch (error) {
         console.error('Error:', error);
         return [];
@@ -46,6 +46,18 @@ async function hideImage() {
       console.error('Error:', error);
     }
   }
+
+  // Function to submit a new quote
+  async function submitNewQuote(quote) {
+    try {
+        const response = await fetch(`/api/newQuote?quote=${encodeURIComponent(quote)}`, { method: 'POST' });
+        if (!response.ok) throw new Error('Network response was not ok');
+        await response.text();
+        document.getElementById('quote-text').innerText = quote;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
 
 async function fetchJson(filename) {
     try {
@@ -108,7 +120,7 @@ window.onload = async function() {
     const useProvidedSayings = providedSayings.length > 0;
     const useProvidedImages = providedImages.length > 0;
 
-    const resolvedSayings = useProvidedSayings? providedSayings : defaultSayings;
+    const resolvedSayings = useProvidedSayings ? providedSayings : defaultSayings;
     const resolvedImages = useProvidedImages ? providedImages : defaultImages;
     
     // Change background image

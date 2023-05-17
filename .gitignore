@@ -1,4 +1,4 @@
 images/
 node_modules/
-sayings.txt
+./sayings.txt
 data/
