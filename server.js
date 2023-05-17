@@ -6,7 +6,7 @@ const port = 5353;
 const fs = require('fs');
 
 // Initialize SQLite database
-const db = new sqlite3.Database('banished.sqlite3', (err) => {
+const db = new sqlite3.Database('./data/banished.sqlite3', (err) => {
   if (err) {
     return console.error(err.message);
   }
@@ -56,7 +56,7 @@ app.get('/api/images', (req, res) => {
 });
 
 app.post('/api/hideImage', async (req, res) => {
-  const imageName = req.query.imageName;
+  const imageName = decodeURIComponent(req.query.imageName);;
   if (!imageName || !imageName.length) {
     return res.status(400).send('Missing imageName, use: \'?imageName=ugulugacat.jpg\'');
   }
@@ -128,7 +128,7 @@ app.get('/api/hiddenQuotes', async (req, res) => {
         else resolve(rows);
       });
     });
-    res.status(200).json(rows);  // Send hidden quotes as JSON
+    res.status(200).json(rows.map(obj => obj.quote));  // Send hidden quotes as JSON
   } catch (err) {
     console.error('Error reading from quotes table:', err);
     res.status(500).send('Error getting hidden quotes');
@@ -144,7 +144,7 @@ app.get('/api/hiddenImages', async (req, res) => {
         else resolve(rows);
       });
     });
-    res.status(200).json(rows);  // Send hidden images as JSON
+    res.status(200).json(rows.map(obj => obj.name));  // Send hidden images as JSON
   } catch (err) {
     console.error('Error reading from images table:', err);
     res.status(500).send('Error getting hidden images');

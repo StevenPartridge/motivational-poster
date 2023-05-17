@@ -7,4 +7,5 @@ services:
     volumes:
      - ./sayings.txt:/usr/src/app/sayings.txt
      - ./images:/usr/src/app/images
+     - ./data:/usr/src/app/data
     restart: always
