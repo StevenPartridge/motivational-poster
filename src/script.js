@@ -23,6 +23,30 @@ async function fetchImageFileNames() {
     }
 }
 
+// Function to hide the current image
+async function hideImage() {
+    const imageName = document.body.style.backgroundImage.slice(5, -2);
+    try {
+      const response = await fetch(`/api/hideImage?imageName=${imageName}`, { method: 'POST' });
+      if (!response.ok) throw new Error('Network response was not ok');
+      // Handle response here if needed
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+  
+  // Function to hide the current quote
+  async function hideQuote() {
+    const quote = document.getElementById('quote-text').innerText;
+    try {
+      const response = await fetch(`/api/hideQuote?quote=${encodeURIComponent(quote)}`, { method: 'POST' });
+      if (!response.ok) throw new Error('Network response was not ok');
+      // Handle response here if needed
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
 async function fetchJson(filename) {
     try {
       const response = await fetch(`./assets/${filename}`);
@@ -65,4 +89,9 @@ window.onload = async function() {
     // Change quote
     let quoteIndex = Math.floor(Math.random() * resolvedSayings.length);
     document.getElementById('quote-text').innerText = resolvedSayings[quoteIndex];
+
+    // Set up the buttons
+    document.getElementById('hideImage').addEventListener('click', hideImage);
+    document.getElementById('hideQuote').addEventListener('click', hideQuote);
+
 }

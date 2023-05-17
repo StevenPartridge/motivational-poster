@@ -41,3 +41,25 @@ body {
 #download-button:hover {
     background-color: rgba(0,0,0,0.1);
 }
+
+.hide-button {
+    position: fixed;
+    top: 0;
+    right: 20px;
+    padding: 5px;
+    border: none;
+    border-radius: 0 0 5px 5px;
+    background: rgba(0, 0, 0, 0.5);  /* semi-transparent black background */
+    color: white;
+    font-size: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .hide-button:first-child {
+    right: 115px;
+  }
+
+  .hide-button:hover {
+    background: rgba(0, 0, 0, 0.8);  /* darker on hover */
+  }
