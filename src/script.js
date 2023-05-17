@@ -49,12 +49,16 @@ async function hideImage() {
 
   // Function to submit a new quote
   async function submitNewQuote(quote) {
+    if (!quote || !quote.length) { 
+        return;
+    }
     try {
         const response = await fetch(`/api/newQuote?quote=${encodeURIComponent(quote)}`, { method: 'POST' });
         if (!response.ok) throw new Error('Network response was not ok');
         await response.text();
         document.getElementById('quote-text').innerText = quote;
     } catch (error) {
+        document.getElementById('quote-text').innerText = quote;
         console.error('Error:', error);
     }
 }
@@ -168,5 +172,44 @@ window.onload = async function() {
     // Set up the buttons
     document.getElementById('hideImage').addEventListener('click', hideImage);
     document.getElementById('hideQuote').addEventListener('click', hideQuote);
+
+    document.getElementById('expand-button').addEventListener('click', function() {
+        var inputContainer = document.getElementById('input-container');
+        console.log(inputContainer.style.display);
+        if (inputContainer.style.display === "block") {
+            inputContainer.style.display = "none";
+        } else {
+            inputContainer.style.display = "block";
+        }
+      });
+      
+      // TODO: Move these functions out
+      document.getElementById('submit-button').addEventListener('click', function() {
+        var newQuote = document.getElementById('new-quote-input').value;
+        document.getElementById('new-quote-input').value = "";
+        var inputContainer = document.getElementById('input-container');
+        if (inputContainer.style.display === "none") {
+            inputContainer.style.display = "block";
+        } else {
+            inputContainer.style.display = "none";
+        }
+        submitNewQuote(newQuote);
+      });
+
+      // TODO: Totally duplicated from above
+      document.getElementById('new-quote-input').addEventListener('keydown', function(event) {
+        // If the key pressed was 'Enter'
+        if (event.key === 'Enter') {
+            var newQuote = document.getElementById('new-quote-input').value;
+            document.getElementById('new-quote-input').value = "";
+            var inputContainer = document.getElementById('input-container');
+            if (inputContainer.style.display === "none") {
+                inputContainer.style.display = "block";
+            } else {
+                inputContainer.style.display = "none";
+            }
+            submitNewQuote(newQuote);
+        }
+      });
 
 }

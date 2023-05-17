@@ -151,6 +151,20 @@ app.post('/api/newQuote', async (req, res) => {
       return;
     }
 
+    // Check if the image is already hidden
+    const row = await new Promise((resolve, reject) => {
+      db.get('SELECT quote FROM quotes WHERE quote = ?', quote, (err, row) => {
+        if (err) reject(err);
+        else resolve(row);
+      });
+    });
+
+    if (row) {
+      // Quote already exists
+      res.status(400).send('Quote already exists');
+      return;
+    }
+
     const stmt = await db.prepare("INSERT INTO quotes (quote) VALUES (?)");
     await stmt.run([quote]);
     await stmt.finalize();

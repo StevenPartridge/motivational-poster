@@ -44,11 +44,11 @@ body {
 
 .hide-button {
     position: fixed;
-    top: 0;
+    bottom: 0;
     right: 20px;
     padding: 5px;
     border: none;
-    border-radius: 0 0 5px 5px;
+    border-radius: 5px 5px 0 0;
     background: rgba(0, 0, 0, 0.5);  /* semi-transparent black background */
     color: white;
     font-size: 10px;
@@ -62,4 +62,59 @@ body {
 
   .hide-button:hover {
     background: rgba(0, 0, 0, 0.8);  /* darker on hover */
+  }
+
+  #expandable-leaf {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  
+  #expand-button {
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    background: rgba(0, 0, 0, 0.5);  /* semi-transparent black background */
+    color: white;
+    cursor: pointer;
+    border-radius: 0 0 5px 5px;
+    position: fixed;
+    top: 0;
+    left: 20px;
+  }
+  
+  #input-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 50px;
+  }
+  
+  #input-container.hidden {
+    display: none;
+  }
+  
+  #input-container.visible {
+    display: block;
+  }
+  
+  #new-quote-input {
+    width: 200px;
+    padding: 5px;
+    height: 12px;
+    background: rgba(0, 0, 0, 0.5);  /* semi-transparent black background */
+    color: white;
+    border-radius: 0 0 0 5px;
+  }
+  
+  #submit-button {
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    background:rgba(0, 0, 0, 0.5);  /* semi-transparent black background */
+    color: white;
+    border: none;
+    height: 26px;
+    margin: none;
   }
