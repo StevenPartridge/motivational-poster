@@ -6,6 +6,7 @@ body {
   justify-content: center;
   background-size: cover;
   background-position: center;
+  transition: background-image 0.4s ease-in-out;
 }
 
 #quote-box {

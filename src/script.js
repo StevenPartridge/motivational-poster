@@ -46,6 +46,8 @@ async function hideImage() {
     } catch (error) {
       console.error('Error:', error);
     }
+
+    advanceState();
   }
   
   // Function to hide the current quote
@@ -58,6 +60,8 @@ async function hideImage() {
     } catch (error) {
       console.error('Error:', error);
     }
+
+    advanceState();
   }
 
   // Function to submit a new quote
@@ -133,8 +137,6 @@ async function fetchHiddenQuotes() {
     
         let imageUrl;
         if (validImage) {
-          console.log(state.useProvidedImages);
-          console.log(state.providedImages);
             imageUrl = `${state.useProvidedImages ? '/images/' : './assets/'}${state.images[imageIndex]}`;
             document.body.style.backgroundImage = `url(${imageUrl})`;
         } else {
@@ -188,9 +190,6 @@ window.onload = async function() {
     state.bannedImages = bannedImages;
     state.quotes = state.useProvidedSayings ? providedSayings : defaultSayings;
     state.images = state.useProvidedImages ? providedImages : defaultImages;
-
-    console.log(state.useProvidedImages, providedImages);
-
     state.quotes = state.quotes.filter(quote => !state.bannedQuotes.includes(quote));
     
     advanceState();
