@@ -1,3 +1,16 @@
+
+// Store for advancing state
+const state = {
+  imageIndex: 0,
+  quoteIndex: 0,
+  images: null,
+  quotes: null,
+  bannedQuotes: null,
+  bannedImages: null,
+  useProvidedSayings: true,
+  useProvidedImages: true
+}
+
 // Function to fetch sayings from server
 async function fetchSayings() {
     try {
@@ -104,6 +117,54 @@ async function fetchHiddenQuotes() {
     }
   }
 
+
+  function advanceState() {
+        // Change background image
+        let emergencyStop = 100;
+        let validImage;
+        let imageIndex;
+        while (!validImage && emergencyStop > 0) {
+            imageIndex = Math.floor(Math.random() * state.images.length);
+            if (!state.bannedImages.includes(state.images[imageIndex])) {
+                validImage = true;
+            }
+            emergencyStop--;
+        }
+    
+        let imageUrl;
+        if (validImage) {
+          console.log(state.useProvidedImages);
+          console.log(state.providedImages);
+            imageUrl = `${state.useProvidedImages ? '/images/' : './assets/'}${state.images[imageIndex]}`;
+            document.body.style.backgroundImage = `url(${imageUrl})`;
+        } else {
+            console.error('Could not find a valid image after 100 tries');
+        }
+        
+        // Change download link
+        let downloadLink = document.getElementById('download-link');
+        downloadLink.href = imageUrl;
+    
+        // Change quote
+        emergencyStop = 100;
+        let validQuote;
+        let quoteIndex;
+        while (!validQuote && emergencyStop > 0) {
+            quoteIndex = Math.floor(Math.random() * state.quotes.length);
+            if (!state.bannedQuotes.includes(state.quotes[quoteIndex]) && state.quotes[quoteIndex].length) {
+                validQuote = true;
+            }
+            emergencyStop--;
+        }
+    
+        if (validQuote) {
+            document.getElementById('quote-text').innerText = state.quotes[quoteIndex];
+        } else {
+            console.error('Could not find a valid quote after 100 tries');
+        }
+  }
+
+
 window.onload = async function() {
     const [
         providedSayings,
@@ -121,57 +182,23 @@ window.onload = async function() {
         fetchHiddenImages()
     ]);
 
-    const useProvidedSayings = providedSayings.length > 0;
-    const useProvidedImages = providedImages.length > 0;
+    state.useProvidedImages = providedImages.length > 0;
+    state.useProvidedSayings = providedSayings.length > 0;
+    state.bannedQuotes = bannedQuotes;
+    state.bannedImages = bannedImages;
+    state.quotes = state.useProvidedSayings ? providedSayings : defaultSayings;
+    state.images = state.useProvidedImages ? providedImages : defaultImages;
 
-    const resolvedSayings = useProvidedSayings ? providedSayings : defaultSayings;
-    const resolvedImages = useProvidedImages ? providedImages : defaultImages;
+    console.log(state.useProvidedImages, providedImages);
+
+    state.quotes = state.quotes.filter(quote => !state.bannedQuotes.includes(quote));
     
-    // Change background image
-    let emergencyStop = 100;
-    let validImage;
-    let imageIndex;
-    while (!validImage && emergencyStop > 0) {
-        imageIndex = Math.floor(Math.random() * resolvedImages.length);
-        if (!bannedImages.includes(resolvedImages[imageIndex])) {
-            validImage = true;
-        }
-        emergencyStop--;
-    }
-
-    let imageUrl;
-    if (validImage) {
-        imageUrl = `${useProvidedImages ? 'images/' : 'assets/'}${resolvedImages[imageIndex]}`;
-        document.body.style.backgroundImage = `url(${imageUrl})`;
-    } else {
-        console.error('Could not find a valid image after 100 tries');
-    }
-    
-    // Change download link
-    let downloadLink = document.getElementById('download-link');
-    downloadLink.href = imageUrl;
-
-    // Change quote
-    emergencyStop = 100;
-    let validQuote;
-    let quoteIndex;
-    while (!validQuote && emergencyStop > 0) {
-        quoteIndex = Math.floor(Math.random() * resolvedSayings.length);
-        if (!bannedQuotes.includes(resolvedSayings[quoteIndex])) {
-            validQuote = true;
-        }
-        emergencyStop--;
-    }
-
-    if (validQuote) {
-        document.getElementById('quote-text').innerText = resolvedSayings[quoteIndex];
-    } else {
-        console.error('Could not find a valid quote after 100 tries');
-    }
+    advanceState();
 
     // Set up the buttons
     document.getElementById('hideImage').addEventListener('click', hideImage);
     document.getElementById('hideQuote').addEventListener('click', hideQuote);
+    document.getElementById('advance').addEventListener('click', advanceState);
 
     document.getElementById('expand-button').addEventListener('click', function() {
         var inputContainer = document.getElementById('input-container');

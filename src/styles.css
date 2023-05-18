@@ -1,120 +1,129 @@
 body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-size: cover;
-    background-position: center;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
 }
 
 #quote-box {
-    color: white;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    text-align: center;
-    max-width: 80%;
-    box-shadow: -8px -8px 50px #000000;
-    text-shadow: 0px 0px 3px #000000;
+  color: white;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  text-align: center;
+  max-width: 80%;
+  box-shadow: -8px -8px 50px #000000;
+  text-shadow: 0px 0px 3px #000000;
 }
 
 #quote-text {
-    font-size: 2em;
+  font-size: 2em;
 }
 
 #download-button {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    width: 30px;
-    height: 30px;
-    background: url('assets/download-icon.png') no-repeat center;
-    background-size: 70%;
-    border-radius: 50%;
-    border: 2px solid white; /* Add a white border */
-    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.3);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 30px;
+  height: 30px;
+  background: url('assets/download-icon.png') no-repeat center;
+  background-size: 70%;
+  border-radius: 50%;
+  border: 2px solid white; /* Add a white border */
+  box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: background-color 0.3s ease;
 }
 
-#download-button:hover {
-    background-color: rgba(0,0,0,0.1);
+button:hover {
+  background-color: rgba(0,0,0,0.1);
+}
+
+button {
+  transition: background 0.3s ease;
+  cursor: pointer;
+  background-color: transparent;
+  background: rgba(0, 0, 0, 0.5);  /* semi-transparent black background */
+  border: none;
+  color: white;
 }
 
 .hide-button {
-    position: fixed;
-    bottom: 0;
-    right: 20px;
-    padding: 5px;
-    border: none;
-    border-radius: 5px 5px 0 0;
-    background: rgba(0, 0, 0, 0.5);  /* semi-transparent black background */
-    color: white;
-    font-size: 10px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .hide-button:first-child {
-    right: 115px;
-  }
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+  padding: 5px;
+  border: none;
+  border-radius: 5px 5px 0 0;
+  background: rgba(0, 0, 0, 0.5);  /* semi-transparent black background */
+  font-size: 10px;
+}
 
-  .hide-button:hover {
-    background: rgba(0, 0, 0, 0.8);  /* darker on hover */
-  }
+.hide-button:first-child {
+  right: 115px;
+}
 
-  #expandable-leaf {
-    position: fixed;
-    top: 0;
-    left: 0;
-  }
-  
-  #expand-button {
-    background-color: transparent;
-    border: none;
-    font-size: 18px;
-    background: rgba(0, 0, 0, 0.5);  /* semi-transparent black background */
-    color: white;
-    cursor: pointer;
-    border-radius: 0 0 5px 5px;
-    position: fixed;
-    top: 0;
-    left: 20px;
-  }
-  
-  #input-container {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 50px;
-  }
-  
-  #input-container.hidden {
-    display: none;
-  }
-  
-  #input-container.visible {
-    display: block;
-  }
-  
-  #new-quote-input {
-    width: 200px;
-    padding: 5px;
-    height: 12px;
-    background: rgba(0, 0, 0, 0.5);  /* semi-transparent black background */
-    color: white;
-    border-radius: 0 0 0 5px;
-  }
-  
-  #submit-button {
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
-    background:rgba(0, 0, 0, 0.5);  /* semi-transparent black background */
-    color: white;
-    border: none;
-    height: 26px;
-    margin: none;
-  }
+#expandable-leaf {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#expand-button {
+  font-size: 18px;
+  border-radius: 0 0 5px 5px;
+  position: fixed;
+  top: 0;
+  left: 20px;
+}
+
+#input-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 50px;
+}
+
+#input-container.hidden {
+  display: none;
+}
+
+#input-container.visible {
+  display: block;
+}
+
+#new-quote-input {
+  width: 200px;
+  padding: 5px;
+  height: 12px;
+  background: rgba(0, 0, 0, 0.5);  /* semi-transparent black background */
+  color: white;
+  border-radius: 0 0 0 5px;
+  box-shadow: none;
+  border: none;
+  outline: none;
+  margin-top: -5px;
+}
+
+#submit-button {
+  padding: 5px;
+  font-size: 11px;
+  height: 22px;
+  margin: none;
+  margin-left: -5px;
+}
+
+.advance-button {
+  padding: 5px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  margin: none;
+}
