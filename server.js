@@ -8,7 +8,7 @@ const fs = require('fs');
 const isDev = process.env.NODE_ENV === 'development';
 
 // Initialize SQLite database
-const dbFile = isDev ? 'db.sqlite' : '/data/db.sqlite';
+const dbFile = isDev ? 'db.sqlite' : './data/db.sqlite';
 const db = new sqlite3.Database(dbFile, (err) => {
   if (err) {
     return console.error(err.message);
